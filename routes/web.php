@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
+    if(auth()->user())return redirect('/logout');
     return redirect("/form");
 });
 Route::post('/form', [FormController::class, "hero"]);

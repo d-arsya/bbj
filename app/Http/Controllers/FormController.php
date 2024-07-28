@@ -21,16 +21,22 @@ class FormController extends Controller
     }
     public function hero(Request $request)
     {
+        $form = Form::find($request["form"]);
+        if($form->sisa==0){
+            return back();
+        }
+        $request->validate([
+            "telepon"=>'regex:/^8/'
+        ]);
         $kode = $this->generate();
         Hero::create([
             "nama" => $request["nama"],
-            "telepon" => $request["telepon"],
+            "telepon" => "62".$request["telepon"],
             "asal" => $request["asal"],
             "form" => $request["form"],
             "kode" => $kode,
             "status" => "belum",
         ]);
-        $form = Form::find($request["form"]);
         $form->sisa = $form->sisa - 1;
         $form->save();
         session(['form' => $form->id]);
@@ -39,7 +45,8 @@ class FormController extends Controller
     }
     public function generate()
     {
-        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        // $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $characters = '1234567890';
         $charactersLength = strlen($characters);
         $uniqueString = '';
 

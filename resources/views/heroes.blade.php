@@ -10,8 +10,8 @@
                 <h1 class="text-xl">{{ $form[0]->kuota }}</h1>
                 <h1 class="text-sm mt-3">Sisa</h1>
                 <h1 class="text-xl">{{ $form[0]->sisa }}</h1>
-                <h1 class="text-sm mt-3">Selesai</h1>
-                <h1 class="text-xl">Jam {{ $form[0]->close }}</h1>
+                {{-- <h1 class="text-sm mt-3">Selesai</h1>
+                <h1 class="text-xl">Jam {{ $form[0]->close }}</h1> --}}
                 <a href="/form/end/{{ $form[0]->id }}" class="block w-full bg-pink-600 hover:bg-pink-700 rounded-md text-center py-2 mt-3 text-white">Akhiri</a>
             </div>
         </div>
@@ -19,11 +19,11 @@
         <h1 class="text-center text-xl text-white mt-2 mb-6">BBJ X Holland</h1>
         <div class="px-5 text-white">
             @foreach ($heroes as $hero)
-            <div class="flex justify-between p-2 bg-pink-800 rounded-sm mt-1">
+            <div class="flex justify-between p-3 bg-pink-800 rounded-md mt-1">
                 <div>
-                    <h1 class="text-md font-bold">{{ $hero->nama }}</h1>
+                    <h1 class="text-md font-bold">{{ ucwords($hero->nama) }}</h1>
                     <h1 class="italic text-sm">{{ $hero->asal }}</h1>
-                    <h1 class="fonr-bold text-lg text-sm">{{ $hero->kode }}</h1>
+                    <h1 class="fonr-bold text-lg text-md font-bold mt-2">{{ $hero->kode }}</h1>
                 </div>
                 <div class="flex gap-4">
                     <a href="https://wa.me/{{ $hero->telepon }}" class="hover:text-black"><svg xmlns="http://www.w3.org/2000/svg" width="20"
@@ -67,8 +67,8 @@
                         class="bg-pink-800 w-full text-slate-100 mt-6 focus:outline-none" placeholder="Kuota">
                         <div class="w-full h-px bg-pink-600 mt-1"></div>
                         <input type="number" value="11" name="close" id=""
-                        class="bg-pink-800 w-full text-slate-100 mt-6 focus:outline-none" placeholder="Selesai">
-                        <div class="w-full h-px bg-pink-600 mt-1"></div>
+                        class="hidden bg-pink-800 w-full text-slate-100 mt-6 focus:outline-none" placeholder="Selesai">
+                        <div class="hidden w-full h-px bg-pink-600 mt-1"></div>
                         <input type="submit" value="Buat"
                         class="w-full bg-white rounded-md p-1 text-lg font-bold mt-10 text-pink-800">
                     </form>

@@ -17,8 +17,8 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::create([
-            "username"=>"admin",
-            "password"=>Hash::make("admin")
+            "username"=>env('ADMIN_USERNAME'),
+            "password"=>Hash::make(env('ADMIN_PASSWORD'))
         ]);
     }
 }
