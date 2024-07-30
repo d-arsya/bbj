@@ -10,11 +10,18 @@ class FormController extends Controller
 {
     public function store(Request $request)
     {
+        $request->validate([
+            "donatur"=>['required'],
+            "kuota"=>['required','integer'],
+        ]);
         Form::create([
             "donatur" => $request["donatur"],
             "kuota" => $request["kuota"],
             "sisa" => $request["kuota"],
-            "close" => $request["close"],
+            "maps" => $request["maps"]??'https://maps.app.goo.gl/qcD3VUYT1ynjysi19',
+            "lokasi" => $request["lokasi"]??'Podocarpus Corner',
+            "jam" => $request["jam"],
+            "pengambilan" => $request["tanggal"],
             "status" => "aktif",
         ]);
         return back();
@@ -54,7 +61,19 @@ class FormController extends Controller
             $index = rand(0, $charactersLength - 1);
             $uniqueString .= $characters[$index];
         }
-
+        
         return $uniqueString;
+    }
+    public function edit(Request $request){
+        $form = Form::where('status','aktif')->first();
+        if($request["metode"]=="tambah"){
+            $form->sisa = $form->sisa + $request["jumlah"];
+            $form->kuota = $form->kuota + $request["jumlah"];
+        }else{
+            $form->sisa = $form->sisa - $request["jumlah"];
+            $form->kuota = $form->kuota - $request["jumlah"];
+        }
+        $form->save();    
+        return back();   
     }
 }

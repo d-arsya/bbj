@@ -26,7 +26,10 @@ return new class extends Migration
             $table->string('donatur');
             $table->integer('kuota');
             $table->integer('sisa');
-            $table->integer('close');
+            $table->date('pengambilan');
+            $table->integer('jam');
+            $table->string('lokasi')->nullable();
+            $table->string('maps')->nullable();
             $table->enum('status',["aktif","selesai"]);
             $table->timestamps();
         });

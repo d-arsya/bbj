@@ -1,18 +1,27 @@
+@php
+    use Carbon\Carbon;
+@endphp
 @extends('layouts.main')
 @section('container')
-    @if ($form->count() == 1)
+{{-- {{ dd($forms[0]->status) }} --}}
+    @if ($forms[0]->status=='aktif')
         <div class="px-10">
             <h1 class="text-center text-xl text-white mt-6">Food Rescue Aktif</h1>
             <div class="bg-pink-800 text-white rounded-md p-3 mt-4">
                 <h1 class="text-sm">Donatur</h1>
-                <h1 class="text-xl">{{ $form[0]->donatur }}</h1>
-                <h1 class="text-sm mt-3">Jumlah</h1>
-                <h1 class="text-xl">{{ $form[0]->kuota }}</h1>
+                <h1 class="text-xl">{{ $forms[0]->donatur }}</h1>
+                <h1 class="text-sm mt-3">Jumlah <svg onclick="openPopup()" class="inline ml-3 hover:text-black" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                  </svg></h1>
+                <h1 class="text-xl">{{ $forms[0]->kuota }}</h1>
                 <h1 class="text-sm mt-3">Sisa</h1>
-                <h1 class="text-xl">{{ $form[0]->sisa }}</h1>
+                <h1 class="text-xl">
+                    
+                    {{ $forms[0]->sisa }}</h1>
                 {{-- <h1 class="text-sm mt-3">Selesai</h1>
-                <h1 class="text-xl">Jam {{ $form[0]->close }}</h1> --}}
-                <a href="/form/end/{{ $form[0]->id }}" class="block w-full bg-pink-600 hover:bg-pink-700 rounded-md text-center py-2 mt-3 text-white">Akhiri</a>
+                <h1 class="text-xl">Jam {{ $forms[0]->close }}</h1> --}}
+                <a href="/form/end/{{ $forms[0]->id }}" class="block w-full bg-pink-600 hover:bg-pink-700 rounded-md text-center py-2 mt-3 text-white">Akhiri</a>
             </div>
         </div>
         <h1 class="text-center text-xl text-white mt-6">Daftar Heroes</h1>
@@ -23,7 +32,10 @@
                 <div>
                     <h1 class="text-md font-bold">{{ ucwords($hero->nama) }}</h1>
                     <h1 class="italic text-sm">{{ $hero->asal }}</h1>
+                    @if ($hero->status=='belum')
                     <h1 class="fonr-bold text-lg text-md font-bold mt-2">{{ $hero->kode }}</h1>
+                        
+                    @endif
                 </div>
                 <div class="flex gap-4">
                     <a href="https://wa.me/{{ $hero->telepon }}" class="hover:text-black"><svg xmlns="http://www.w3.org/2000/svg" width="20"
@@ -60,15 +72,24 @@
                 <div class="bg-pink-800 text-white rounded-md py-5 px-6 mt-4">
                     <form action="/heroes" method="POST">
                         @csrf
-                        <input type="text" name="donatur" id=""
-                        class="bg-pink-800 w-full text-slate-100 mt-6 focus:outline-none" placeholder="Donatur">
+                        <input type="text" name="donatur"
+                        class="bg-pink-800 w-full text-slate-100 mt-6 focus:outline-none" placeholder="Donatur" required>
                         <div class="w-full h-px bg-pink-600 mt-1"></div>
-                        <input type="number" name="kuota" id=""
-                        class="bg-pink-800 w-full text-slate-100 mt-6 focus:outline-none" placeholder="Kuota">
+                        <input type="number" name="kuota"
+                        class="bg-pink-800 w-full text-slate-100 mt-6 focus:outline-none" placeholder="Kuota" required>
                         <div class="w-full h-px bg-pink-600 mt-1"></div>
-                        <input type="number" value="11" name="close" id=""
-                        class="hidden bg-pink-800 w-full text-slate-100 mt-6 focus:outline-none" placeholder="Selesai">
-                        <div class="hidden w-full h-px bg-pink-600 mt-1"></div>
+                        <input type="date" name="tanggal"
+                        class="bg-pink-800 w-full text-slate-100 mt-6 focus:outline-none" placeholder="Pengambilan" required>
+                        <div class="w-full h-px bg-pink-600 mt-1"></div>
+                        <input type="number" name="jam"
+                        class="bg-pink-800 w-full text-slate-100 mt-6 focus:outline-none" placeholder="Jam Pengambilan" required>
+                        <div class="w-full h-px bg-pink-600 mt-1"></div>
+                        <input type="text" name="lokasi"
+                        class="bg-pink-800 w-full text-slate-100 mt-6 focus:outline-none" placeholder="Lokasi">
+                        <div class="w-full h-px bg-pink-600 mt-1"></div>
+                        <input type="text" name="maps"
+                        class="bg-pink-800 w-full text-slate-100 mt-6 focus:outline-none" placeholder="Maps">
+                        <div class="w-full h-px bg-pink-600 mt-1"></div>
                         <input type="submit" value="Buat"
                         class="w-full bg-white rounded-md p-1 text-lg font-bold mt-10 text-pink-800">
                     </form>
@@ -77,4 +98,46 @@
     @endif
 
     </div>
+    <h1 class="text-center text-white font-bold text-xl mt-4">Riwayat Donasi</h1>
+    <div class="px-10">
+        @foreach ($forms->where('status','selesai')->sortBy([['pengambilan','desc']],SORT_STRING) as $form)
+        <div class="p-2 bg-pink-800 rounded-md mt-3">
+            <div class="text-white font-semibold">{{ $form->donatur }}</div>
+            <h1 class="text-pink-600 text-xs italic font-medium">{{ Carbon::parse($form->pengambilan)->isoFormat('dddd, DD MMMM YY') }}</h1>
+        </div>
+        @endforeach
+    </div>
+
+    <div id="popup" class="hidden fixed bg-black top-0 left-0 z-50 w-full h-full flex justify-center items-center bg-opacity-60">
+        <div class="rounded-md w-80 md:w-96 bg-white px-10 py-4 absolute">
+            {{-- <h1 class="text-3xl font-bold mb-4 text-center text-pink-600"></h1> --}}
+            <form id="form" action="/heroes/edit" method="POST">
+                @csrf
+                <input autofocus="true" autocomplete="false" type="number" name="jumlah" placeholder="Jumlah" class="w-full mt-4 border border-1 border-grey-200 p-2 rounded-t-lg" required>
+                <input type="text" name="metode" id="metode" class="hidden">
+                <div class="grid grid-cols-2">
+                    <div onclick="tambah()" class="text-center rounded-es-lg bg-white border border-1 border-pink-600 hover:bg-pink-600 w-full p-1 text-pink-600 hover:text-white font-semibold cursor-pointer">+</div>
+                    <div onclick="kurang()" class="text-center rounded-ee-lg bg-white border border-1 border-pink-600 hover:bg-pink-600 w-full p-1 text-pink-600 hover:text-white font-semibold cursor-pointer">-</div>
+                </div>
+                <div onclick="closePopup()" class="text-center w-full p-3 text-red-600 hover:text-red-400 font-semibold cursor-pointer">Batal</div>
+            </form>
+        </div>
+    </div>
+    <script>
+        function openPopup(){
+            document.getElementById('popup').classList.remove('hidden')
+        }
+        function tambah(){
+            document.querySelector('input[name="metode"]').value="tambah"
+            document.getElementById('form').submit()
+        }
+        function kurang(){
+            document.querySelector('input[name="metode"]').value="kurang"
+            document.getElementById('form').submit()
+        }
+        function closePopup(){
+            document.querySelector('input[name="jumlah"]').value=""
+            document.getElementById('popup').classList.add('hidden')
+        }
+    </script>
 @endsection
