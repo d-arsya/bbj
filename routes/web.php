@@ -27,6 +27,7 @@ Route::middleware(['auth'])->group(function () {
             "heroes" => $heroes,
         ]);
     });
+    Route::get('/donation/{id}', [FormController::class, 'detail']);
     Route::post('/heroes/edit', [FormController::class, 'edit']);
     Route::get('/heroes/delete/{id}',function($id){
         $form = Form::active()[0];

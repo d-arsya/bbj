@@ -12,4 +12,7 @@ class Form extends Model
     public static function scopeActive($query){
         return $query->where('status','aktif')->get();
     }
+    public function heroes(){
+        return $this->hasMany(Hero::class,'form','id')->get();
+    }
 }

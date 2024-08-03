@@ -76,4 +76,9 @@ class FormController extends Controller
         $form->save();    
         return back();   
     }
+    public function detail(Request $request,$id){
+        $donation = Form::find($id);
+        $heroes = $donation->heroes();
+        return view('donation',compact(["donation","heroes"]));
+    }
 }
