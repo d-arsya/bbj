@@ -14,6 +14,6 @@ Berbagi Bites Jogja adalah inisiatif yang dikelola oleh para relawan yang berasa
 ## Kontak
 Untuk informasi lebih lanjut, kunjungi [website][2] kami atau hubungi kami melalui instagram di [@berbagibitesjogja][1]
 
-[1]: https://www.instagram.com/berbagibitesjogja/           "Wikipedia"
+[1]: https://www.instagram.com/berbagibitesjogja/           "Instagram"
 
-[2]: https://bbj.disyfa.site           "BBJ"
+[2]: https://bbj.disyfa.site           "Website"
