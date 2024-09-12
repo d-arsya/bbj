@@ -1,4 +1,4 @@
-<footer class="fixed bottom-0 w-full bg-pink-600 py-4">
+<footer class="fixed bottom-0 w-full bg-navy py-4">
     <h1 id="clk" class="text-center text-sm text-white font-semibold">© Copyright 2024 BERBAGI BITES JOGJA. All Rights Reserved.</h1>
 </footer>
 

@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    if(auth()->user())return redirect('/logout');
-    return redirect("/form");
-});
-
 Route::middleware(['auth'])->group(function () {
     Route::post('/heroes', [FormController::class, 'store']);
     Route::get('/heroes', function () {
@@ -41,7 +36,7 @@ Route::middleware(['auth'])->group(function () {
     
         return back();
     });
-    Route::get('/form/end/{id}',function($id){
+    Route::get('/end/{id}',function($id){
         Form::where('id',$id)->update(["status"=>'selesai']);
         Hero::where('status','belum')->delete();
         return back();
@@ -55,8 +50,8 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
-Route::post('/form', [FormController::class, "hero"]);
-Route::get('/form', function () {
+Route::post('/', [FormController::class, "hero"]);
+Route::get('/', function () {
     $form = Form::active();
     return view('form', [
         "form" => $form

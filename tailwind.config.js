@@ -8,10 +8,13 @@ export default {
   theme: {
     extend: {
       colors:{
-        pink:{
-          800: '#0395AF',
-          600:'#21568A'
-        },
+        lime:"#F4FFC3",
+        tosca: "#0395AF",
+        orange: "#F57313",
+        yellow: "#F2D394",
+        white : "#FFFFFF",
+        navy: "#21568A"
+
       }
     },
   },

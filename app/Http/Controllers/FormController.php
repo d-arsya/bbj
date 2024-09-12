@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Backup;
 use App\Models\Form;
 use App\Models\Hero;
 use Illuminate\Http\Request;
@@ -44,6 +45,13 @@ class FormController extends Controller
             "kode" => $kode,
             "status" => "belum",
         ]);
+        Backup::create([
+            "nama" => $request["nama"],
+            "telepon" => "62".$request["telepon"],
+            "asal" => $request["asal"],
+            "form" => $request["form"],
+            "kode" => $kode,
+        ]);
         $form->sisa = $form->sisa - 1;
         $form->save();
         session(['form' => $form->id]);
@@ -52,7 +60,6 @@ class FormController extends Controller
     }
     public function generate()
     {
-        // $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $characters = '1234567890';
         $charactersLength = strlen($characters);
         $uniqueString = '';

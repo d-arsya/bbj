@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('container')
     <div class="px-10 mt-3">
-        <div class="p-2 bg-pink-800 rounded-md mt-3">
+        <div class="p-2 bg-tosca rounded-md mt-3">
             <div class="text-white text-center text-xl font-bold">{{ $donation->donatur }}</div>
             <h1 class="text-white text-md font-medium">{{ $donation->kuota }} Paket</h1>
             <h1 class="text-white text-md font-medium">{{ $donation->kuota - $donation->sisa }} Heroes</h1>
@@ -10,7 +10,7 @@
     <h1 class="text-center text-white font-bold text-xl mt-4">Daftar Heroes</h1>
     <div class="px-10">
         @foreach ($heroes as $hero)
-        <div class="flex justify-between p-3 bg-pink-800 rounded-md mt-1">
+        <div class="flex justify-between p-3 bg-tosca rounded-md mt-1">
             <div>
                 <h1 class="text-md text-white font-bold">{{ ucwords($hero->nama) }}</h1>
                 <h1 class="italic text-pink-600 text-sm">{{ $hero->asal }}</h1>

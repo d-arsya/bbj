@@ -21,6 +21,15 @@ return new class extends Migration
             $table->char('kode',6);
             $table->timestamps();
         });
+        Schema::create('backups', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama');
+            $table->string('telepon');
+            $table->string('asal');
+            $table->foreignId('form');
+            $table->char('kode',6);
+            $table->timestamps();
+        });
         Schema::create('forms', function (Blueprint $table) {
             $table->id();
             $table->string('donatur');
@@ -58,5 +67,6 @@ return new class extends Migration
         Schema::dropIfExists('heroes');
         Schema::dropIfExists('forms');
         Schema::dropIfExists('sessions');
+        Schema::dropIfExists('backups');
     }
 };

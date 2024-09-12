@@ -7,7 +7,7 @@
   <!-- MADE WITH ❤️ BY d-arsya -->
   @vite('resources/css/app.css')
 </head>
-<body class="md:hidden bg-pink-600 pb-72">
+<body class="md:hidden bg-navy pb-72">
   @include('partials.header')
   @yield('container')
   @include('partials.footer')
