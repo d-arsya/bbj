@@ -9,5 +9,5 @@ use Illuminate\Database\Eloquent\Model;
 class Backup extends Model
 {
     use HasFactory;
-    private $guarded = [];
+    protected $guarded = [];
 }
